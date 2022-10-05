@@ -20,6 +20,7 @@
     "react-icons": "^4.4.0"
   },
   "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1"
   }
