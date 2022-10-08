@@ -40,24 +40,36 @@ console.log(`authentication error ${errorCode} ${errorMessage}.`);
 };
 //define the jsx component
 return (
-<Box position={"fixed"} top="5%" right="5%">
+<Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
+    <Box>
+        <Link href="/add-todo">
+        Add To Do
+        </Link>
+    </Box>
+    <Box>
+    <Link href="/">
+        List All To Dos
+        </Link>
+    </Box>
+    <Box textAlign={"right"}>
 <Button onClick={() => toggleColorMode()}>
 {colorMode == "dark" ? <FaSun /> : <FaMoon />}
-</Button>{" "}
-{/* to see if you are logged in */}
-{isLoggedIn && (
-<>
-<Text color="green.500">{user.email}</Text>
-<Link color="red.500" onClick={() => auth.signOut()}>
-Logout
-</Link>
-</>
-)}
-{!isLoggedIn && (
-<Button leftIcon={<FaGoogle />} onClick={() => handleAuth()}>
-Login with Google
 </Button>
-)}
+    </Box>
+{/* to see if you are logged in */}
+        {isLoggedIn && (
+            <>
+            <Text color="green.500">{user.email}</Text>
+            <Link color="red.500" onClick={() => auth.signOut()}>
+            Logout
+            </Link>
+            </>
+            )}
+            {!isLoggedIn && (
+            <Button leftIcon={<FaGoogle />} onClick={() => handleAuth()}>
+            Login with Google
+            </Button>
+            )}
 </Box>
 );
 };

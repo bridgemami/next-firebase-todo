@@ -22,40 +22,35 @@ import {
 const TodoList = () => {
     const [todos, setTodos] = React.useState([]);
     const {  user } = useAuth() || {};
-    const toast = useToast();
-    //nested function that does the work of updating the list from the firestone db
-    const refreshData = () => {
-    if (!user) {
-    setTodos([]);
-    return;
-    }
-    //if our code continues execution to here, a user is logged in
-    //do a query on firestore collection
-    const q = query(
-        collection(db, "todo"), 
-        where("user", "==", user.uid)
-        );
-        //since query() is async, here er set up an event handler with firebase
-    onSnapshot(
-        q, 
-        (querySnapshot) => {
-            //in this function we have all the results from q in querySnapshot
-    let ar = [];
-    querySnapshot.docs.forEach(
-        (doc) => {
-    ar.push({ 
-        id: doc.id, 
-        ...doc.data() 
-    });
-    });
-    //once we loop thru using forEach and have array of docs in ar 
-    setTodos(ar);
-    });
-    };
-    //tell react to update the ui refreshData()
-    useEffect(() => {
-    refreshData();
-    }, 
+    const toast = useToast();    
+    //tell react to update the ui
+    useEffect(() => { if (!user) {
+                setTodos([]);
+                return;
+                }
+                //if our code continues execution to here, a user is logged in
+                //do a query on firestore collection
+                const q = query(
+                    collection(db, "todo"), 
+                    where("user", "==", user.uid)
+                    );
+                    //since query() is async, here er set up an event handler with firebase
+                onSnapshot(
+                    q, 
+                    (querySnapshot) => {
+                        //in this function we have all the results from q in querySnapshot
+                let ar = [];
+                querySnapshot.docs.forEach(
+                    (doc) => {
+                ar.push({ 
+                    id: doc.id, 
+                    ...doc.data() 
+                });
+                });
+                //once we loop thru using forEach and have array of docs in ar 
+                setTodos(ar);
+                });
+            }, 
     [user]
     );
     //build nested function to delete a todo
