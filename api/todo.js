@@ -18,7 +18,7 @@ user: userId,
 title: title,
 description: description,
 status: status,
-createdAt: new Date().getTime(),
+createdAt: new Date()
 });
 } catch (err) {
     console.log(err);

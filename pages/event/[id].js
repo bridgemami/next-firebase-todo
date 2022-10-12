@@ -13,7 +13,7 @@ import {
 import { db } from "../../firebase";
 
 //define the JSX component to show just one single todo
-const TodoItem = ({itemData}) => {
+const EventItem = ({itemData}) => {
 //enforce user to login first
     const {user} = useAuth() || {};
     if(!user) {
@@ -24,20 +24,17 @@ const TodoItem = ({itemData}) => {
     return (
         <Box mt={5}>
             <Heading as ={"h3"} fontSize={"xl"}>
-                {itemData.title}
+                {itemData.event}
             </Heading>
             <Text>
-                {itemData.description}
+                {itemData.Date}
             </Text>
             <Text>
-                {itemData.status}
+                {itemData.time}
             </Text>
             <Text>
                 {itemData.createdAt}
             </Text>
-            <Badge bg="green" color="white">
-                <Link href="/">Back to List Page</Link>
-            </Badge>
         </Box>
     )
 };
@@ -48,9 +45,9 @@ export async function getServerSideProps(context) {
     //our function will receive all it needs from Next.js in context variable
     //if you want to get the url parameter that next.js for id 'cuase [id].js
     //context.params.id has it!
-     let itemData = null;
+    let itemData = null;
     // get a doc from firestore collection
-    const docRef= doc(db, "todo", context.params.id);
+    const docRef= doc(db, "event", context.params.id);
     const docSnap = await getDoc(docRef);
     if(docSnap.exists()) {
         itemData= docSnap.data();
@@ -63,4 +60,4 @@ export async function getServerSideProps(context) {
     }
 }
 //export the component
-export default TodoItem;
+export default EventItem;

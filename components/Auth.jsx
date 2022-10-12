@@ -51,6 +51,17 @@ return (
         List All To Dos
         </Link>
     </Box>
+    <Box>
+    <Link href="/event">
+        Add Event
+        </Link>
+    </Box>
+    <Box>
+    <Link href="/list-event">
+        Event List
+        </Link>
+    </Box>
+    
     <Box textAlign={"right"}>
 <Button onClick={() => toggleColorMode()}>
 {colorMode == "dark" ? <FaSun /> : <FaMoon />}
