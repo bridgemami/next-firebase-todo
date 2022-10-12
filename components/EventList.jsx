@@ -16,26 +16,26 @@ import {
     } from "firebase/firestore";
     import { db } from "../firebase";
     import { FaToggleOff, FaToggleOn, FaTrash } from "react-icons/fa";
-    import { deleteTodo, toggleTodoStatus } from "../api/todo";
+    import { deleteEvent, toggleEventStatus } from "../api/event";
     
     //define the jsx component for the list
-const TodoList = () => {
-    const [todos, setTodos] = React.useState([]);
+const EventList = () => {
+    const [events, setEvents] = React.useState([]);
     const {  user } = useAuth() || {};
     const toast = useToast();    
     //tell react to update the ui
     useEffect(() => { if (!user) {
-                setTodos([]);
+                setEvents([]);
                 return;
                 }
                 //if our code continues execution to here, a user is logged in
                 //do a query on firestore collection
                 const q = query(
-                    collection(db, "todo"), 
+                    collection(db, "event"), 
                     where("user", "==", user.uid)
                     );
                     //since query() is async, here er set up an event handler with firebase
-                onSnapshot(
+                 onSnapshot(
                     q, 
                     (querySnapshot) => {
                         //in this function we have all the results from q in querySnapshot
@@ -48,19 +48,19 @@ const TodoList = () => {
                 });
                 });
                 //once we loop thru using forEach and have array of docs in ar 
-                setTodos(ar);
+                setEvents(ar);
                 });
             }, 
     [user]
     );
     //build nested function to delete a todo
-    const handleTodoDelete = async (id) => {
-    if (confirm("Are you sure you wanna delete this todo?")) {
-    deleteTodo(id);
+    const handleEventDelete = async (id) => {
+    if (confirm("Are you sure you wanna delete this event?")) {
+    deleteEvent(id);
     toast(
         { 
-            title: "Todo deleted successfully", 
-            status: "success" 
+            title: "Event deleted successfully", 
+            status: "Success" 
         }
         );
     }
@@ -68,14 +68,14 @@ const TodoList = () => {
     //build nested function to toggle status
     const handleToggle = async (id, status) => {
     const newStatus = status == "completed" ? "pending" : "completed";
-    await toggleTodoStatus(
+    await toggleEventStatus(
         { 
             docId: id, 
             status: newStatus 
         }
         );
     toast({
-    title: `Todo marked ${newStatus}`,
+    title: `Event marked ${newStatus}`,
     status: newStatus == "completed" ? "success" : "warning",
     }
     );
@@ -84,19 +84,19 @@ const TodoList = () => {
     return (
     <Box mt={5}>
     <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
-    {todos &&
-    todos.map(
-        (todo) => (
+    {events &&
+    events.map(
+        (event) => (
     <Box
     p={3}
     boxShadow="2xl"
     shadow={"dark-lg"}
     transition="0.2s"
     _hover={{ boxShadow: "sm" }}
-    key ={todo.id}
+    key ={event.id}
     >
     <Heading as="h3" fontSize={"xl"}>
-    {todo.title}{" "}
+    {event.title}{" "}
     <Badge
     color="red.500"
     bg="inherit"
@@ -107,12 +107,12 @@ const TodoList = () => {
     }}
     float="right"
     size="xs"
-    onClick={() => handleTodoDelete(todo.id)}
+    onClick={() => handleEventDelete(event.id)}
     >
     <FaTrash />
     </Badge>
     <Badge
-    color={todo.status == "pending" ? "gray.500" : "green.500"}
+    color={event.status == "pending" ? "gray.500" : "green.500"}
     bg="inherit"
     transition={"0.2s"}
     _hover={{
@@ -123,26 +123,26 @@ const TodoList = () => {
     size="xs"
     onClick={() => handleToggle
         (
-            todo.id, 
-            todo.status
+            event.id, 
+            event.status
             )
         }
     >
-    {todo.status == "pending" ? <FaToggleOff /> : <FaToggleOn />}
+    {event.status == "pending" ? <FaToggleOff /> : <FaToggleOn />}
     </Badge>
     <Badge
     float="right"
     opacity="0.8"
-    bg={todo.status == "pending" ? "yellow.500" : "green.500"}
+    bg={event.status == "pending" ? "yellow.500" : "green.500"}
     >
-    {todo.status}
+    {event.status}
     </Badge>
     </Heading>
-    <Text>{todo.description}</Text>
+    <Text>{event.day}, {event.time}</Text>
     </Box>
     ))}
     </SimpleGrid>
     </Box>
     );
     };
-    export default TodoList;
+    export default EventList;
