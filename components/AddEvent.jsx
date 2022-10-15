@@ -9,6 +9,7 @@ Button,
 Textarea,
 Stack,
 Select,
+Text,
 useToast,
 } from "@chakra-ui/react";
 //bring in useAuth from our hooks
@@ -61,34 +62,38 @@ toast({
 return (
 <Box w="40%" margin={"0 auto"} display="block" mt={5}>
 <Stack direction="column">
+<Text fontSize='md'>Name of the Event:</Text>
 <Input 
 placeholder="Name of Event"
 value={title}
 // e just is local variable standing for the event of a changing.
 onChange={(e) => setTitle(e.target.value)}
 />
+<Text fontSize='md'>Day of the Event:</Text>
 <Textarea
 placeholder="Date mm/dd/yy or mm/dd/yyyy"
 value={day}
 onChange={(e) => setDay(e.target.value)}
 />
+<Text fontSize='md'>Time of the Event:</Text>
 <Textarea
 placeholder="00:00 AM or PM / 00-24"
 value={time}
 onChange={(e) => setTime(e.target.value)}
 />
+<Text fontSize='md'>Did you RSVP?</Text>
 <Select value={status} onChange={(e) => setStatus(e.target.value)}>
 <option
-value={"pending"}
-style={{ color: "yellow", fontWeight: "bold" }}
->
-Pending ⌛
-</option>
-<option
-value={"completed"}
+value={"yes"}
 style={{ color: "green", fontWeight: "bold" }}
 >
-Completed ✅
+Yes, I did RSVP
+</option>
+<option
+value={"no"}
+style={{ color: "red", fontWeight: "bold" }}
+>
+I have not RSVP or do not need to
 </option>
 </Select>
 <Button

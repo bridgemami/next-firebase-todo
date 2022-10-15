@@ -9,6 +9,7 @@ Button,
 Textarea,
 Stack,
 Select,
+Text,
 useToast,
 } from "@chakra-ui/react";
 //bring in useAuth from our hooks
