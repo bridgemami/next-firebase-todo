@@ -9,9 +9,13 @@ Button,
 Textarea,
 Stack,
 Select,
+InputGroup,
+InputLeftElement,
+InputRightElement,
 Text,
 useToast,
 } from "@chakra-ui/react";
+import { PhoneIcon, EmailIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
 //bring in useAuth from our hooks
 import useAuth from "../hooks/useAuth";
 import { makeContact } from "../api/contact";
@@ -63,23 +67,36 @@ return (
 <Stack direction="column">
 <Text fontSize='md'>Name:</Text>
 <Input 
+input= 'text'
 placeholder="Name of Contact"
 value={name}
 // e just is local variable standing for the contact of a changing.
 onChange={(e) => setName(e.target.value)}
 />
 <Text fontSize='md'>Phone:</Text>
-<Textarea
+{/* <Input
+type="tel"
 placeholder="Phone Number"
 value={phone}
 onChange={(e) => setPhone(e.target.value)}
-/>
+/> */}
+<InputGroup>
+    <InputLeftElement
+      pointerEvents='none'
+      children={<PhoneIcon color='gray.300' />}
+    />
+    <Input type='tel' placeholder='Phone number'value={phone}
+onChange={(e) => setPhone(e.target.value)} />
+  </InputGroup>
 <Text fontSize='md'>Email:</Text>
-<Textarea
-placeholder="####@gmail.com"
-value={email}
-onChange={(e) => setEmail(e.target.value)}
-/>
+<InputGroup>
+    <InputLeftElement
+      pointerEvents='none'
+      children={<EmailIcon color='gray.300' />}
+    />
+    <Input type='email' placeholder='Email' value={email}
+onChange={(e) => setEmail(e.target.value)} />
+  </InputGroup>
 <Text fontSize='md'>Address:</Text>
 <Textarea
 placeholder="123 Main Street, Everytown, CA. #####"

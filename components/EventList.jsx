@@ -138,7 +138,7 @@ const EventList = () => {
     {event.status}
     </Badge>
     </Heading>
-    <Text>{event.date}</Text>
+    <Text>{event.date} <br />{event.time}</Text>
     </Box>
     ))}
     </SimpleGrid>

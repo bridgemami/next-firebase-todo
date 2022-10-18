@@ -10,13 +10,14 @@ deleteDoc,
 } from "firebase/firestore";
 //create a function as an arrow function
 //const FUNCTIONAME= asyn (arguments) => {code};
-const makeEvent = async ({ userId, title, date, status }) => {
+const makeEvent = async ({ userId, title, date, time, status }) => {
 try {
     //collection name is in " "
 await addDoc(collection(db, "event"), {
 user: userId,
 title: title,
 date: date,
+time: time.toString(),
 status: status,
 createdAt: new Date().toString()
 });

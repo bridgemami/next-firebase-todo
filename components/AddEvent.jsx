@@ -20,7 +20,7 @@ const AddEvent = () => {
     //every form control (text input) we want to associate a react state
 const [title, setTitle] = React.useState("");
 const [date, setDate] = React.useState("");
-// const [time, setTime] = React.useState("");
+const [time, setTime] = React.useState("");
 const [status, setStatus] = React.useState("pending");
 const [isLoading, setIsLoading] = React.useState(false);
 const toast = useToast();
@@ -43,15 +43,15 @@ setIsLoading(true);
 const event = {
 title,
 date,
+time,
 status,
 userId: user.uid,
 };
 await makeEvent(event);
 setIsLoading(false);
-// setTitle("");
-// setDay("");
+setTitle("");
 setDate("");
-// setTime("");
+setTime("");
 setStatus("success");
 //show a floaty with status updates
 toast({ 
@@ -66,35 +66,36 @@ return (
 <Input 
 placeholder="Name of Event"
 value={title}
+required="required"
 // e just is local variable standing for the event of a changing.
 onChange={(e) => setTitle(e.target.value)}
 />
 <Text fontSize='md'>Day of the Event:</Text>
 <Input
- placeholder="Date and Time of the event"
+ placeholder="Date of the event"
  size="md"
- type="datetime-local"
+ type="date"
  value={date}
-input
 onChange={(e) => setDate(e.target.value)}
 />
-{/* <Text fontSize='md'>Time of the Event:</Text>
-<Textarea
-placeholder="00:00 AM or PM / 00-24"
+<Text fontSize='md'>Time of the Event:</Text>
+<Input
+placeholder="Time of the Event"
+size="md"
+type="time"
 value={time}
-input
 onChange={(e) => setTime(e.target.value)}
-/> */}
+/>
 <Text fontSize='md'>Did you RSVP?</Text>
 <Select value={status} onChange={(e) => setStatus(e.target.value)}>
 <option
-value={"yes"}
+value={"Completed RSVP"}
 style={{ color: "green", fontWeight: "bold" }}
 >
 Yes, I did RSVP
 </option>
 <option
-value={"no"}
+value={"Have not RSVP"}
 style={{ color: "red", fontWeight: "bold" }}
 >
 I have not RSVP or do not need to
@@ -102,7 +103,7 @@ I have not RSVP or do not need to
 </Select>
 <Button
 onClick={() => handleEventCreate()}
-disabled={title.length < 1 || date.length < 1  || isLoading}
+disabled={title.length < 1 || date.length < 1  || time.length < 1  || isLoading}
 colorScheme="teal"
 variant="solid"
 >
