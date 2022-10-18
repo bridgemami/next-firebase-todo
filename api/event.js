@@ -19,7 +19,7 @@ title: title,
 day: day,
 time: time,
 status: status,
-createdAt: new Date()
+createdAt: new Date().toString()
 });
 } catch (err) {
     console.log(err);

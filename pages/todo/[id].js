@@ -1,19 +1,22 @@
-import React from "react";
+import React from 'react';
 import{
-    Box,
+    Box, 
     Heading,
     SimpleGrid,
-    Text
-} from "@chakra-ui/react";
-import useAuth from "../../hooks/useAuth";
-import {
+    Text, 
+    Badge, 
+    Center,
+    Link
+} from '@chakra-ui/react';
+import useAuth from '../../hooks/useAuth';
+import{
     doc,
     getDoc
-} from "firebase/firestore";
-import { db } from "../../firebase";
+} from 'firebase/firestore';
+import {db} from '../../firebase';
 
 //define the JSX component to show just one single todo
-const TodoItem = ({itemData}) => {
+const todoItem = ({itemData}) => {
 //enforce user to login first
     const {user} = useAuth() || {};
     if(!user) {
@@ -23,7 +26,7 @@ const TodoItem = ({itemData}) => {
     //finally return the jsx component
     return (
         <Box mt={5}>
-            <Heading as ={"h3"} fontSize={"xl"}>
+            <Heading as ="h3" fontSize="xl">
                 {itemData.title}
             </Heading>
             <Text>
@@ -63,4 +66,4 @@ export async function getServerSideProps(context) {
     }
 }
 //export the component
-export default TodoItem;
+export default todoItem;

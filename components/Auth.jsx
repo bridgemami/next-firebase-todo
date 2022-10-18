@@ -52,7 +52,7 @@ return (
         </Link>
     </Box>
     <Box>
-    <Link href="/event">
+    <Link href="/add-event">
         Add Event
         </Link>
     </Box>
@@ -61,7 +61,16 @@ return (
         Event List
         </Link>
     </Box>
-    
+    <Box>
+    <Link href="/add-contact">
+        Add Contact
+        </Link>
+    </Box>
+    <Box>
+    <Link href="/list-contact">
+        Contact List
+        </Link>
+    </Box>    
     <Box textAlign={"right"}>
 <Button onClick={() => toggleColorMode()}>
 {colorMode == "dark" ? <FaSun /> : <FaMoon />}

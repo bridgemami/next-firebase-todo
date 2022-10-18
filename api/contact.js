@@ -19,7 +19,7 @@ name: name,
 phone: phone,
 email: email,
 address: address,
-createdAt: new Date()
+createdAt: new Date().toString()
 });
 } catch (err) {
     console.log(err);
@@ -36,4 +36,4 @@ console.log(err);
 };
 export { makeContact, deleteContact };
 
-console.log(makeEvent)
+console.log(makeContact)

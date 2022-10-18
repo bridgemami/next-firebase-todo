@@ -13,7 +13,7 @@ import {
 import { db } from "../../firebase";
 
 //define the JSX component to show just one single todo
-const EventItem = ({itemData}) => {
+const ContactItem = ({itemData}) => {
 //enforce user to login first
     const {user} = useAuth() || {};
     if(!user) {
@@ -24,13 +24,16 @@ const EventItem = ({itemData}) => {
     return (
         <Box mt={5}>
             <Heading as ={"h3"} fontSize={"xl"}>
-                {itemData.title}
+                {itemData.name}
             </Heading>
             <Text>
-                {itemData.date}
+                {itemData.phone}
             </Text>
             <Text>
-                {itemData.time}
+                {itemData.email}
+            </Text>
+            <Text>
+                {itemData.address}
             </Text>
             <Text>
                 {itemData.createdAt}
@@ -47,7 +50,7 @@ export async function getServerSideProps(context) {
     //context.params.id has it!
     let itemData = null;
     // get a doc from firestore collection
-    const docRef= doc(db, "event", context.params.id);
+    const docRef= doc(db, "contact", context.params.id);
     const docSnap = await getDoc(docRef);
     if(docSnap.exists()) {
         itemData= docSnap.data();
@@ -60,4 +63,4 @@ export async function getServerSideProps(context) {
     }
 }
 //export the component
-export default EventItem;
+export default ContactItem;

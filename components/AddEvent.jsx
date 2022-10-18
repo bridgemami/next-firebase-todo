@@ -52,7 +52,7 @@ setIsLoading(false);
 setTitle("");
 setDay("");
 setTime("");
-setStatus("pending");
+setStatus("success");
 //show a floaty with status updates
 toast({ 
     title: "Event created successfully", 
