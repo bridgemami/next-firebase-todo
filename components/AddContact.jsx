@@ -88,7 +88,7 @@ onChange={(e) => setAddress(e.target.value)}
 />
 <Button
 onClick={() => handleContactCreate()}
-disabled={name.length < 1 || phone.length < 1 || email.length < 1  || address.length < 1 || isLoading}
+disabled={name.length < 1 || isLoading}
 colorScheme="teal"
 variant="solid"
 >
