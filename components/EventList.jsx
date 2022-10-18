@@ -128,17 +128,17 @@ const EventList = () => {
             )
         }
     >
-    {event.status == "pending" ? <FaToggleOff /> : <FaToggleOn />}
+    {event.status == "success" ? <FaToggleOff /> : <FaToggleOn />}
     </Badge>
     <Badge
     float="right"
     opacity="0.8"
-    bg={event.status == "pending" ? "yellow.500" : "green.500"}
+    bg={event.status == "success" ? "yellow.500" : "green.500"}
     >
     {event.status}
     </Badge>
     </Heading>
-    <Text>{event.day} <br /> {event.time}</Text>
+    <Text>{event.date}</Text>
     </Box>
     ))}
     </SimpleGrid>

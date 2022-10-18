@@ -19,8 +19,8 @@ import { makeEvent } from "../api/event";
 const AddEvent = () => {
     //every form control (text input) we want to associate a react state
 const [title, setTitle] = React.useState("");
-const [day, setDay] = React.useState("");
-const [time, setTime] = React.useState("");
+const [date, setDate] = React.useState("");
+// const [time, setTime] = React.useState("");
 const [status, setStatus] = React.useState("pending");
 const [isLoading, setIsLoading] = React.useState(false);
 const toast = useToast();
@@ -42,16 +42,16 @@ return;
 setIsLoading(true);
 const event = {
 title,
-day,
-time,
+date,
 status,
 userId: user.uid,
 };
 await makeEvent(event);
 setIsLoading(false);
-setTitle("");
-setDay("");
-setTime("");
+// setTitle("");
+// setDay("");
+setDate("");
+// setTime("");
 setStatus("success");
 //show a floaty with status updates
 toast({ 
@@ -70,17 +70,21 @@ value={title}
 onChange={(e) => setTitle(e.target.value)}
 />
 <Text fontSize='md'>Day of the Event:</Text>
-<Textarea
-placeholder="Date mm/dd/yy or mm/dd/yyyy"
-value={day}
-onChange={(e) => setDay(e.target.value)}
+<Input
+ placeholder="Date and Time of the event"
+ size="md"
+ type="datetime-local"
+ value={date}
+input
+onChange={(e) => setDate(e.target.value)}
 />
-<Text fontSize='md'>Time of the Event:</Text>
+{/* <Text fontSize='md'>Time of the Event:</Text>
 <Textarea
 placeholder="00:00 AM or PM / 00-24"
 value={time}
+input
 onChange={(e) => setTime(e.target.value)}
-/>
+/> */}
 <Text fontSize='md'>Did you RSVP?</Text>
 <Select value={status} onChange={(e) => setStatus(e.target.value)}>
 <option
@@ -98,7 +102,7 @@ I have not RSVP or do not need to
 </Select>
 <Button
 onClick={() => handleEventCreate()}
-disabled={title.length < 1 || day.length < 1 || time.length < 1  || isLoading}
+disabled={title.length < 1 || date.length < 1  || isLoading}
 colorScheme="teal"
 variant="solid"
 >
