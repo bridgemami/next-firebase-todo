@@ -16,7 +16,7 @@ import {
     } from "firebase/firestore";
     import { db } from "../firebase";
     import { FaToggleOff, FaToggleOn, FaTrash } from "react-icons/fa";
-    import { deleteContact} from "../api/contact";
+    import { deleteContact } from "../api/contact";
     
     //define the jsx component for the list
 const ContactList = () => {
@@ -34,8 +34,8 @@ const ContactList = () => {
                     collection(db, "contact"), 
                     where("user", "==", user.uid)
                     );
-                    //since query() is async, here er set up an event handler with firebase
-                 onSnapshot(
+                    //since query() is async, here er set up an contact handler with firebase
+                onSnapshot(
                     q, 
                     (querySnapshot) => {
                         //in this function we have all the results from q in querySnapshot
@@ -53,19 +53,33 @@ const ContactList = () => {
             }, 
     [user]
     );
-    //build nested function to delete a todo
+    //build nested function to delete an contact
     const handleContactDelete = async (id) => {
     if (confirm("Are you sure you wanna delete this contact?")) {
     deleteContact(id);
     toast(
         { 
             title: "Contact deleted successfully", 
-            status: "Success" 
+            status: "success" 
         }
         );
     }
     };
-    
+    //build nested function to toggle status
+    // const handleToggle = async (id, status) => {
+    // const newStatus = status == "completed" ? "pending" : "completed";
+    // await toggleContactStatus(
+    //     { 
+    //         docId: id, 
+    //         status: newStatus 
+    //     }
+    //     );
+    // toast({
+    // title: `Contact marked ${newStatus}`,
+    // status: newStatus == "completed" ? "success" : "warning",
+    // }
+    // );
+    // };
     //define the jsx component
     return (
     <Box mt={5}>
@@ -97,10 +111,34 @@ const ContactList = () => {
     >
     <FaTrash />
     </Badge>
-
+    {/* <Badge
+    color={contact.status == "success" ? "gray.500" : "green.500"}
+    bg="inherit"
+    transition={"0.2s"}
+    _hover={{
+    bg: "inherit",
+    transform: "scale(1.2)",
+    }}
+    float="right"
+    size="xs"
+    onClick={() => handleToggle
+        (
+            contact.id, 
+            contact.status
+            )
+        }
+    >
+    {event.status == "pending" ? <FaToggleOff /> : <FaToggleOn />}
+    </Badge>
+    <Badge
+    float="right"
+    opacity="0.8"
+    bg={event.status == "pending" ? "yellow.500" : "green.500"}
+    >
+    {event.status}
+    </Badge> */}
     </Heading>
-    <Text>{contact.name} <br /> {contact.email} <br /> {contact.number}</Text>
-    </Box>
+    <Text>{contact.email} <br />{contact.phone}</Text>    </Box>
     ))}
     </SimpleGrid>
     </Box>
