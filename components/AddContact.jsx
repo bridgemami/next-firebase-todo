@@ -10,10 +10,12 @@ Textarea,
 Stack,
 Select,
 InputGroup,
+FormControl,
+FormLabel,
 InputLeftElement,
 InputRightElement,
 Text,
-useToast,
+useToast
 } from "@chakra-ui/react";
 import { PhoneIcon, EmailIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
 //bring in useAuth from our hooks
@@ -65,7 +67,8 @@ toast({
 return (
 <Box w="40%" margin={"0 auto"} display="block" mt={5}>
 <Stack direction="column">
-<Text fontSize='md'>Name:</Text>
+  <FormControl>
+<FormLabel fontSize='md'>Name:</FormLabel>
 <Input 
 input= 'text'
 placeholder="Name of Contact"
@@ -73,6 +76,7 @@ value={name}
 // e just is local variable standing for the contact of a changing.
 onChange={(e) => setName(e.target.value)}
 />
+</FormControl>
 <Text fontSize='md'>Phone:</Text>
 {/* <Input
 type="tel"
