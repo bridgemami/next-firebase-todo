@@ -4,7 +4,14 @@ import {
     Heading,
     SimpleGrid,
     Text,
+    Show,
+    Hide,
+    Textarea,
+    Input,
+    Select,
+    Stack,
     useToast,
+    Button,
     } from "@chakra-ui/react";
     import React, { useEffect } from "react";
     import useAuth from "../hooks/useAuth";
@@ -12,14 +19,20 @@ import {
         collection, 
         onSnapshot,
         query,
-        where 
+        where,
+        updateDoc, doc 
     } from "firebase/firestore";
     import { db } from "../firebase";
     import { FaToggleOff, FaToggleOn, FaTrash } from "react-icons/fa";
-    import { deleteTodo, toggleTodoStatus } from "../api/todo";
+    import { deleteTodo, toggleTodoStatus, updateTodo } from "../api/todo";
     
     //define the jsx component for the list
 const TodoList = () => {
+const [title, setTitle] = React.useState("");
+const [description, setDescription] = React.useState("");
+const [status, setStatus] = React.useState("pending");
+const [isLoading, setIsLoading] = React.useState(false);
+const [isUpdate, setIsUpdate] = React.useState(false);
     const [todos, setTodos] = React.useState([]);
     const {  user } = useAuth() || {};
     const toast = useToast();    
@@ -53,6 +66,7 @@ const TodoList = () => {
             }, 
     [user]
     );
+
     //build nested function to delete a todo
     const handleTodoDelete = async (id) => {
     if (confirm("Are you sure you wanna delete this todo?")) {
@@ -80,6 +94,21 @@ const TodoList = () => {
     }
     );
     };
+    //update Note
+    //build nested function to update a todo
+
+    const handleTodoUpdate = async (id, title, description) => {
+        updateTodo()
+        if (confirm("Are you sure you wanna update this todo?")) {
+        toast(
+            { 
+                title: "Todo Updated successfully", 
+                status: "success" 
+            }
+            );
+        }
+        };
+
     //define the jsx component
     return (
     <Box mt={5}>
@@ -139,10 +168,49 @@ const TodoList = () => {
     </Badge>
     </Heading>
     <Text>{todo.description}</Text>
+    <Button colorScheme='green' size='xs' onClick={() => document.getElementBy}
+>Update</Button>
     </Box>
     ))}
-    </SimpleGrid>
-    </Box>
+    </SimpleGrid> 
+    <Hide>
+<Stack direction="column">
+<Input
+placeholder="Title"
+value={title}
+// e just is local variable standing for the event of a changing.
+onChange={(e) => setTitle(e.target.value)}
+/>
+<Textarea
+placeholder="Description"
+value={description}
+onChange={(e) => setDescription(e.target.value)}
+/>
+<Select value={status} onChange={(e) => setStatus(e.target.value)}>
+<option
+value={"pending"}
+style={{ color: "yellow", fontWeight: "bold" }}
+>
+Pending ⌛
+</option>
+<option
+value={"completed"}
+style={{ color: "green", fontWeight: "bold" }}
+>
+Completed ✅
+</option>
+</Select>
+<Button
+onClick={() => handleTodoCreate()}
+disabled={title.length < 1 || description.length < 1 || isLoading}
+colorScheme="teal"
+variant="solid"
+>
+Add
+</Button>
+</Stack>
+</Hide>
+</Box>
     );
     };
     export default TodoList;

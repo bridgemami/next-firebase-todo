@@ -22,6 +22,7 @@ const [title, setTitle] = React.useState("");
 const [description, setDescription] = React.useState("");
 const [status, setStatus] = React.useState("pending");
 const [isLoading, setIsLoading] = React.useState(false);
+const [isUpdate, setIsUpdate] = React.useState(false);
 const toast = useToast();
 //let's call useAuth()
 const { isLoggedIn, user } = useAuth() || {};
@@ -55,6 +56,22 @@ toast({
     title: "Todo created successfully", 
     status: "success" });
 };
+//update the status
+
+const updateTodo = async (docId) => {
+    console.log(docId);
+    try {
+        const todoRef = doc(db, "todo", docId);
+        await updateDoc(todoRef,
+            {
+                title: title,
+                description: description,
+            });
+    }
+    catch (err) {
+        console.log(err);
+        }
+}
 //let's return the markup for the addToDo JSX component
 return (
 <Box w="40%" margin={"0 auto"} display="block" mt={5}>
@@ -97,3 +114,4 @@ Add
 );
 };
 export default AddTodo;
+

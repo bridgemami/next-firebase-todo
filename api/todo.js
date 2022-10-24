@@ -6,6 +6,7 @@ collection,
 addDoc,
 updateDoc,
 doc,
+setDoc,
 deleteDoc,
 } from "firebase/firestore";
 //create a function as an arrow function
@@ -24,13 +25,27 @@ createdAt: new Date().toString()
     console.log(err);
 }
 };
+
+const updateTodo = async ({docId, title, description}) => {
+    const todoRef = doc(db, "todo", docId);
+    const data = {
+        title: title,
+        description: description
+      };
+    setDoc(todoRef, data, {merge: true})
+    .then(todoRef =>{
+        console.log('Doc has been updated successfully.')
+    })
+    .catch(error=>
+        console.error(error))
+}
 const toggleTodoStatus = async ({ docId, status }) => {
 try {
 const todoRef = doc(db, "todo", docId);
 await updateDoc( 
 todoRef,
 {
-    status: myStatus
+    status: status
 }
 
 );
@@ -38,6 +53,8 @@ todoRef,
 console.log(err);
 }
 };
+
+
 const deleteTodo = async (docId) => {
 try {
 const todoRef = doc(db, "todo", docId);
@@ -46,4 +63,4 @@ await deleteDoc(todoRef);
 console.log(err);
 }
 };
-export { addTodo, toggleTodoStatus, deleteTodo };
+export { addTodo, toggleTodoStatus, deleteTodo, updateTodo };

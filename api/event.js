@@ -32,7 +32,7 @@ const toggleEventStatus = async ({ docId, status }) => {
     await updateDoc( 
     eventRef,
     {
-        status: myStatus
+        status: status
     }
     
     );
