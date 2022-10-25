@@ -97,20 +97,9 @@ const [isUpdate, setIsUpdate] = React.useState(false);
     //update Note
     //build nested function to update a todo
 
-    const handleTodoUpdate = async (id, title, description) => {
-        updateTodo()
-        if (confirm("Are you sure you wanna update this todo?")) {
-        toast(
-            { 
-                title: "Todo Updated successfully", 
-                status: "success" 
-            }
-            );
-        }
-        };
-
     //define the jsx component
     return (
+        
     <Box mt={5}>
     <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
     {todos &&
@@ -173,43 +162,6 @@ const [isUpdate, setIsUpdate] = React.useState(false);
     </Box>
     ))}
     </SimpleGrid> 
-    <Hide>
-<Stack direction="column">
-<Input
-placeholder="Title"
-value={title}
-// e just is local variable standing for the event of a changing.
-onChange={(e) => setTitle(e.target.value)}
-/>
-<Textarea
-placeholder="Description"
-value={description}
-onChange={(e) => setDescription(e.target.value)}
-/>
-<Select value={status} onChange={(e) => setStatus(e.target.value)}>
-<option
-value={"pending"}
-style={{ color: "yellow", fontWeight: "bold" }}
->
-Pending ⌛
-</option>
-<option
-value={"completed"}
-style={{ color: "green", fontWeight: "bold" }}
->
-Completed ✅
-</option>
-</Select>
-<Button
-onClick={() => handleTodoCreate()}
-disabled={title.length < 1 || description.length < 1 || isLoading}
-colorScheme="teal"
-variant="solid"
->
-Add
-</Button>
-</Stack>
-</Hide>
 </Box>
     );
     };

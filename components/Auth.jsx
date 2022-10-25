@@ -50,15 +50,15 @@ return (
       >
         {/* Desktop Nav Bar */}
 <Flex display={['none', 'none', 'flex', 'flex']}  justifyContent="space-evenly" align="center"
-w={"100vw"}>
+w={"90vw"}>
     <Box>
         <Link href="/list-todo">
-        Add To Do
+        Todo List
         </Link>
     </Box>
     <Box>
     <Link href="/">
-        Add/Update Todo
+        Add Todo
         </Link>
     </Box>
     <Box>
@@ -103,14 +103,20 @@ w={"100vw"}>
             
 </Flex>
 {/* Mobile Nav Bar */}
+<Flex justify="center"
+alignContent={"center"}>
 <IconButton
+alignSelf={"center"}
 aria-label="Open Menu"
 size= "lg"
 mr= {2}
+mt={2}
 icon= {<HamburgerIcon />}
 display={['flex', 'flex', 'none', 'none']}
 onClick={() => changeDisplay('flex')}
 />
+ </Flex>
+</Flex>
 <Flex
  w='100vw'
  display={display}
@@ -126,7 +132,7 @@ onClick={() => changeDisplay('flex')}
           <IconButton
             mt={2}
             mr={2}
-            aria-label="Open Menu"
+            aria-label="Close Menu"
             size="lg"
             icon={
               <CloseIcon />
@@ -143,12 +149,12 @@ bgColor="gray.50"
 >
     <Box>
         <Link href="/list-todo">
-        Add To Do
+        Todo List
         </Link>
     </Box>
     <Box>
     <Link href="/">
-        Add/Update Todo
+        Add Todo
         </Link>
     </Box>
     <Box>
@@ -193,7 +199,7 @@ bgColor="gray.50"
 </Flex>
 </Flex>
 </Flex>
-</Flex>
+
 );
 };
 // export component

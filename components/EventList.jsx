@@ -75,7 +75,7 @@ const EventList = () => {
         }
         );
     toast({
-    title: `Event marked ${newStatus}`,
+    title: `RSVP ${newStatus}`,
     status: newStatus == "completed" ? "success" : "warning",
     }
     );
@@ -97,6 +97,7 @@ const EventList = () => {
     >
     <Heading as="h3" fontSize={"xl"}>
     {event.title}{" "}
+   
     <Badge
     color="red.500"
     bg="inherit"
@@ -111,8 +112,15 @@ const EventList = () => {
     >
     <FaTrash />
     </Badge>
+    <Text fontSize='small'
+    //  float="right"
+     opacity="0.8"
+     align={"right"}
+     paddingEnd={2}>
+        HAVE YOU RSVP?    
+        </Text>
     <Badge
-    color={event.status == "success" ? "gray.500" : "green.500"}
+    color={event.status == "pending" ? "gray.500" : "green.500"}
     bg="inherit"
     transition={"0.2s"}
     _hover={{
@@ -128,17 +136,18 @@ const EventList = () => {
             )
         }
     >
-    {event.status == "success" ? <FaToggleOff /> : <FaToggleOn />}
+    {event.status == "pending" ? <FaToggleOff /> : <FaToggleOn />}
     </Badge>
-    <Badge
+
+   <Badge
     float="right"
     opacity="0.8"
-    bg={event.status == "success" ? "yellow.500" : "green.500"}
+    bg={event.status == "pending" ? "yellow.500" : "green.500"}
     >
     {event.status}
     </Badge>
+    <Text float={"left"}>{event.date} <br />{event.time}</Text>
     </Heading>
-    <Text>{event.date} <br />{event.time}</Text>
     </Box>
     ))}
     </SimpleGrid>

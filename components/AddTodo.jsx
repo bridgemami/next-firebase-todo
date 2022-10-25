@@ -7,6 +7,7 @@ Box,
 Input,
 Button,
 Textarea,
+Heading,
 Stack,
 Select,
 Text,
@@ -74,7 +75,9 @@ const updateTodo = async (docId) => {
 }
 //let's return the markup for the addToDo JSX component
 return (
-<Box w="40%" margin={"0 auto"} display="block" mt={5}>
+    
+<Box w="50%" margin={"0 auto"} display="block" mt={5} >
+<Heading textAlign={"center"} as='h1' mb={5} noOfLines={1} size='xl'>The Todo List</Heading>
 <Stack direction="column">
 <Input
 placeholder="Title"

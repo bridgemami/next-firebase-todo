@@ -17,7 +17,7 @@ await addDoc(collection(db, "event"), {
 user: userId,
 title: title,
 date: date,
-time: time.toString(),
+time: time,
 status: status,
 createdAt: new Date().toString()
 });

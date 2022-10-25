@@ -83,19 +83,20 @@ onChange={(e) => setDate(e.target.value)}
 placeholder="Time of the Event"
 size="md"
 type="time"
+pattern="[0-9]{2}:[0-9]{2}"
 value={time}
 onChange={(e) => setTime(e.target.value)}
 />
 <Text fontSize='md'>Did you RSVP?</Text>
 <Select value={status} onChange={(e) => setStatus(e.target.value)}>
 <option
-value={"Completed RSVP"}
+value={"Yes"}
 style={{ color: "green", fontWeight: "bold" }}
 >
 Yes, I did RSVP
 </option>
 <option
-value={"Have not RSVP"}
+value={"Pending"}
 style={{ color: "red", fontWeight: "bold" }}
 >
 I have not RSVP or do not need to
