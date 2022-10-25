@@ -8,7 +8,6 @@ updateDoc,
 doc,
 setDoc,
 deleteDoc,
-DocumentReference,
 } from "firebase/firestore";
 //create a function as an arrow function
 //const FUNCTIONAME= asyn (arguments) => {code};
@@ -26,22 +25,6 @@ createdAt: new Date().toString()
     console.log(err);
 }
 };
-//edit a todo item
-const editTodo = async ({docId, title, description}) => {
-    const todoRef = doc(db, 'todo', docId);
-    const data = {
-        user: "userId",
-        title: "title",
-        description: "description",
-        status: true,
-    }
-    setDoc(todoRef, data, {merge: true})
-    .then (docRef => {
-        console.log("Update was successful")
-    })
-    .catch(error => {
-        console.error(error);})
-    }
 //toggle for completing a todo
 const toggleTodoStatus = async ({ docId, status }) => {
 try {
@@ -58,6 +41,23 @@ console.log(err);
 }
 };
 
+//edit and update a todo item
+const updateTodo = async (docId) => {
+    const todoRef = doc(db, 'todo', docId);
+    const data = {
+        user: "userId",
+        title: "title",
+        description: "description",
+        status: true,
+    }
+    setDoc(todoRef, data, {merge: true})
+    .then (todoRef => {
+        console.log("Update was successful")
+    })
+    .catch(error => {
+        console.error(error);})
+    }
+
 //delete a todo
 const deleteTodo = async (docId) => {
 try {
@@ -67,4 +67,4 @@ await deleteDoc(todoRef);
 console.log(err);
 }
 };
-export { addTodo, toggleTodoStatus, deleteTodo, editTodo };
+export { addTodo, toggleTodoStatus, deleteTodo, updateTodo };

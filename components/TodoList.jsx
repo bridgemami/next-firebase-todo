@@ -10,6 +10,7 @@ import {
     Input,
     Select,
     Stack,
+    Link,
     useToast,
     Button,
     } from "@chakra-ui/react";
@@ -79,6 +80,10 @@ const [isUpdate, setIsUpdate] = React.useState(false);
         );
     }
     };
+//build nested function to update a todo
+    const  handleTodoUpdate = async (id) => {
+        updateTodo(id);
+    }
     //build nested function to toggle status
     const handleToggle = async (id, status) => {
     const newStatus = status == "completed" ? "pending" : "completed";
@@ -94,8 +99,6 @@ const [isUpdate, setIsUpdate] = React.useState(false);
     }
     );
     };
-    //update Note
-    //build nested function to update a todo
 
     //define the jsx component
     return (
@@ -157,8 +160,7 @@ const [isUpdate, setIsUpdate] = React.useState(false);
     </Badge>
     </Heading>
     <Text>{todo.description}</Text>
-    <Button colorScheme='green' size='xs' onClick={() => document.getElementBy}
->Update</Button>
+    <Link href={`/todo/${todo.id}`}><Button colorScheme='green' size='xs'>Update</Button></Link>
     </Box>
     ))}
     </SimpleGrid> 

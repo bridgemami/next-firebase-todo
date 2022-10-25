@@ -3,11 +3,16 @@ import{
     Box, 
     Heading,
     SimpleGrid,
+    Container,
     Text, 
+    extendTheme,
+    Button,
     Badge, 
+    borderColor,
     Center,
     Link
 } from '@chakra-ui/react';
+import Auth from "../../components/Auth";
 import useAuth from '../../hooks/useAuth';
 import{
     doc,
@@ -25,8 +30,10 @@ const todoItem = ({itemData}) => {
     //if our code continues execution to here, a user is logged in
     //finally return the jsx component
     return (
-        <Box mt={5}>
-            <Heading as ="h3" fontSize="xl">
+        <Container maxW="7xl">
+            <Auth />
+        <Box border= '5px' mt={5}  borderColor='black'>
+            <Heading noOfLines={1} as ="h1" fontSize="xl" textDecoration={"underline"}>
                 {itemData.title}
             </Heading>
             <Text>
@@ -35,13 +42,11 @@ const todoItem = ({itemData}) => {
             <Text>
                 {itemData.status}
             </Text>
-            <Text>
-                {itemData.createdAt}
-            </Text>
-            <Badge bg="green" color="white">
-                <Link href="/">Back to List Page</Link>
-            </Badge>
         </Box>
+        <Button bg="green" color="white" mt={7} _hover={{ bg: 'green.800', transform: 'scale(1.10)' }}>
+                <Link href="/">Back to List Page</Link>
+            </Button>
+        </Container>
     )
 };
 
