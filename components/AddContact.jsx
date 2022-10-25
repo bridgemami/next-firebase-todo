@@ -17,7 +17,7 @@ InputRightElement,
 Text,
 useToast
 } from "@chakra-ui/react";
-import { PhoneIcon, EmailIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
+import { FaPhoneAlt, FaRegEnvelope} from "react-icons/fa";
 //bring in useAuth from our hooks
 import useAuth from "../hooks/useAuth";
 import { makeContact } from "../api/contact";
@@ -87,7 +87,7 @@ onChange={(e) => setPhone(e.target.value)}
 <InputGroup>
     <InputLeftElement
       pointerEvents='none'
-      children={<PhoneIcon color='gray.300' />}
+      children={<FaPhoneAlt />}
     />
     <Input type='tel' placeholder='Phone number'value={phone}
 onChange={(e) => setPhone(e.target.value)} />
@@ -96,7 +96,7 @@ onChange={(e) => setPhone(e.target.value)} />
 <InputGroup>
     <InputLeftElement
       pointerEvents='none'
-      children={<EmailIcon color='gray.300' />}
+      children={<FaRegEnvelope />}
     />
     <Input type='email' placeholder='Email' value={email}
 onChange={(e) => setEmail(e.target.value)} />

@@ -23,7 +23,7 @@ import {
         updateDoc, doc 
     } from "firebase/firestore";
     import { db } from "../firebase";
-    import { FaToggleOff, FaToggleOn, FaTrash } from "react-icons/fa";
+    import { FaToggleOff, FaToggleOn, FaTrash, FaEdit } from "react-icons/fa";
     import { deleteTodo, toggleTodoStatus, updateTodo } from "../api/todo";
     
     //define the jsx component for the list

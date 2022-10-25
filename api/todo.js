@@ -26,22 +26,23 @@ createdAt: new Date().toString()
     console.log(err);
 }
 };
-
+//edit a todo item
 const editTodo = async ({docId, title, description}) => {
-    try{
-    const todoRef = doc(db, "todo", docId);
-    if (!todoRef.empty){
-    await updateDoc(todoRef, 
-         {
-        title: title,
-        description: description
-      }
-    );
-}}
-    catch(error){
-        console.error(error)
+    const todoRef = doc(db, 'todo', docId);
+    const data = {
+        user: "userId",
+        title: "title",
+        description: "description",
+        status: true,
     }
-}
+    setDoc(todoRef, data, {merge: true})
+    .then (docRef => {
+        console.log("Update was successful")
+    })
+    .catch(error => {
+        console.error(error);})
+    }
+//toggle for completing a todo
 const toggleTodoStatus = async ({ docId, status }) => {
 try {
 const todoRef = doc(db, "todo", docId);
@@ -57,7 +58,7 @@ console.log(err);
 }
 };
 
-
+//delete a todo
 const deleteTodo = async (docId) => {
 try {
 const todoRef = doc(db, "todo", docId);
