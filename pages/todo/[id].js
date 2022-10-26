@@ -2,10 +2,8 @@ import React, {useState, useEffect} from 'react';
 import{
     Box, 
     Heading,
-    SimpleGrid,
     Container,
     Text, 
-    extendTheme,
     Button,
     Badge, 
     borderColor,
