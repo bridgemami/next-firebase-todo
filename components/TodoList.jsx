@@ -149,7 +149,7 @@ const [isUpdate, setIsUpdate] = React.useState(false);
     {todo.status}
     </Badge>
     </Heading>
-    <Text>{todo.description}</Text>
+    <Text>Task: {todo.description}</Text>
     <Link href={`/todo/${todo.id}`}><Button colorScheme='green' size='xs'>Update</Button></Link>
     </Box>
     ))}

@@ -114,34 +114,10 @@ const ContactList = () => {
     >
     <FaTrash />
     </Badge>
-    {/* <Badge
-    color={contact.status == "success" ? "gray.500" : "green.500"}
-    bg="inherit"
-    transition={"0.2s"}
-    _hover={{
-    bg: "inherit",
-    transform: "scale(1.2)",
-    }}
-    float="right"
-    size="xs"
-    onClick={() => handleToggle
-        (
-            contact.id, 
-            contact.status
-            )
-        }
-    >
-    {event.status == "pending" ? <FaToggleOff /> : <FaToggleOn />}
-    </Badge>
-    <Badge
-    float="right"
-    opacity="0.8"
-    bg={event.status == "pending" ? "yellow.500" : "green.500"}
-    >
-    {event.status}
-    </Badge> */}
     </Heading>
-    <Text>{contact.email} <br />{contact.phone}</Text>    
+    <Text>Phone: {contact.phone}</Text>
+    <Text>Email: {contact.email}</Text>
+    <Text>Address: {contact.address}</Text>    
     <Link href={`/contact/${contact.id}`}><Button colorScheme='green' size='xs'>Update</Button></Link>
     </Box>
     ))}

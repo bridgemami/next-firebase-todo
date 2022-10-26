@@ -150,7 +150,8 @@ const EventList = () => {
     {event.status}
     </Badge>
     </Heading>
-    <Text>{event.date} <br />{event.time}</Text>
+    <Text>Date: {event.date}</Text>
+    <Text>Time: {event.time}</Text>
     <Link href={`/event/${event.id}`}><Button colorScheme='green' size='xs'>Update</Button></Link>
 
   
