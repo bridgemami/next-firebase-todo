@@ -42,21 +42,21 @@ console.log(err);
 };
 
 //edit and update a todo item
-const updateTodo = async (docId) => {
-    const todoRef = doc(db, 'todo', docId);
-    const data = {
-        user: "userId",
-        title: "title",
-        description: "description",
-        status: true,
-    }
-    setDoc(todoRef, data, {merge: true})
-    .then (todoRef => {
-        console.log("Update was successful")
-    })
-    .catch(error => {
-        console.error(error);})
-    }
+// const updateTodo = async (docId) => {
+//     const todoRef = doc(db, 'todo', docId);
+//     const data = {
+//         user: "userId",
+//         title: "title",
+//         description: "description",
+//         status: true,
+//     }
+//     setDoc(todoRef, data, {merge: true})
+//     .then (todoRef => {
+//         console.log("Update was successful")
+//     })
+//     .catch(error => {
+//         console.error(error);})
+//     }
 
 //delete a todo
 const deleteTodo = async (docId) => {
@@ -67,4 +67,4 @@ await deleteDoc(todoRef);
 console.log(err);
 }
 };
-export { addTodo, toggleTodoStatus, deleteTodo, updateTodo };
+export { addTodo, toggleTodoStatus, deleteTodo };
