@@ -25,7 +25,7 @@ import {
     } from "firebase/firestore";
     import { db } from "../firebase";
     import { FaToggleOff, FaToggleOn, FaTrash, FaEdit } from "react-icons/fa";
-    import { deleteTodo, toggleTodoStatus, updateTodo } from "../api/todo";
+    import { deleteTodo, toggleTodoStatus } from "../api/todo";
     
     //define the jsx component for the list
 const TodoList = () => {
@@ -80,10 +80,6 @@ const [isUpdate, setIsUpdate] = React.useState(false);
         );
     }
     };
-//build nested function to update a todo
-    const  handleTodoUpdate = async (id) => {
-        updateTodo(id);
-    }
     //build nested function to toggle status
     const handleToggle = async (id, status) => {
     const newStatus = status == "completed" ? "pending" : "completed";
@@ -102,8 +98,8 @@ const [isUpdate, setIsUpdate] = React.useState(false);
 
     //define the jsx component
     return (
-        
     <Box mt={5}>
+    <Heading textAlign={"center"} as='h1' my={5} noOfLines={1} size='xl'>Todo List</Heading>   
     <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
     {todos &&
     todos.map(

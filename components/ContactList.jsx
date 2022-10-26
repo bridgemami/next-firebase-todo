@@ -3,6 +3,8 @@ import {
     Box,
     Heading,
     SimpleGrid,
+    Button,
+    Link,
     Text,
     useToast,
     } from "@chakra-ui/react";
@@ -15,7 +17,7 @@ import {
         where 
     } from "firebase/firestore";
     import { db } from "../firebase";
-    import { FaToggleOff, FaToggleOn, FaTrash } from "react-icons/fa";
+    import { FaTrash } from "react-icons/fa";
     import { deleteContact } from "../api/contact";
     
     //define the jsx component for the list
@@ -83,6 +85,7 @@ const ContactList = () => {
     //define the jsx component
     return (
     <Box mt={5}>
+    <Heading textAlign={"center"} as='h1' my={5} noOfLines={1} size='xl'>Contact List</Heading>
     <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
     {contacts &&
     contacts.map(
@@ -138,7 +141,9 @@ const ContactList = () => {
     {event.status}
     </Badge> */}
     </Heading>
-    <Text>{contact.email} <br />{contact.phone}</Text>    </Box>
+    <Text>{contact.email} <br />{contact.phone}</Text>    
+    <Link href={`/contact/${contact.id}`}><Button colorScheme='green' size='xs'>Update</Button></Link>
+    </Box>
     ))}
     </SimpleGrid>
     </Box>

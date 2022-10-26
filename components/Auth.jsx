@@ -52,13 +52,13 @@ return (
 <Flex display={['none', 'none', 'flex', 'flex']}  justifyContent="space-evenly" align="center"
 w={"90vw"}>
     <Box>
-        <Link href="/list-todo">
-        Todo List
+    <Link href="/">
+        Add Todo
         </Link>
     </Box>
     <Box>
-    <Link href="/">
-        Add Todo
+        <Link href="/list-todo">
+        Todo List
         </Link>
     </Box>
     <Box>
@@ -148,13 +148,13 @@ zIndex={20}
 bgColor="gray.50"
 >
     <Box>
-        <Link href="/list-todo">
-        Todo List
+    <Link href="/">
+        Add Todo
         </Link>
     </Box>
     <Box>
-    <Link href="/">
-        Add Todo
+        <Link href="/list-todo">
+        Todo List
         </Link>
     </Box>
     <Box>

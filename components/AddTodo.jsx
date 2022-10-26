@@ -11,6 +11,7 @@ Heading,
 Stack,
 Select,
 Text,
+FormLabel,
 useToast,
 } from "@chakra-ui/react";
 //bring in useAuth from our hooks
@@ -57,39 +58,26 @@ toast({
     title: "Todo created successfully", 
     status: "success" });
 };
-//update the status
 
-const updateTodo = async (docId) => {
-    console.log(docId);
-    try {
-        const todoRef = doc(db, "todo", docId);
-        await updateDoc(todoRef,
-            {
-                title: title,
-                description: description,
-            });
-    }
-    catch (err) {
-        console.log(err);
-        }
-}
 //let's return the markup for the addToDo JSX component
 return (
-    
-<Box w="50%" margin={"0 auto"} display="block" mt={5} >
+<Box w="40%" margin={"0 auto"} display="block" mt={5}>
 <Heading textAlign={"center"} as='h1' mb={5} noOfLines={1} size='xl'>The Todo List</Heading>
 <Stack direction="column">
+<FormLabel fontSize='md'>Title:</FormLabel>
 <Input
 placeholder="Title"
 value={title}
 // e just is local variable standing for the event of a changing.
 onChange={(e) => setTitle(e.target.value)}
 />
+<FormLabel fontSize='md'>Description:</FormLabel>
 <Textarea
 placeholder="Description"
 value={description}
 onChange={(e) => setDescription(e.target.value)}
 />
+<FormLabel fontSize='md'>Status:</FormLabel>
 <Select value={status} onChange={(e) => setStatus(e.target.value)}>
 <option
 value={"pending"}
@@ -109,6 +97,7 @@ onClick={() => handleTodoCreate()}
 disabled={title.length < 1 || description.length < 1 || isLoading}
 colorScheme="teal"
 variant="solid"
+marginTop={10}
 >
 Add
 </Button>

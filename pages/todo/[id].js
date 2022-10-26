@@ -17,6 +17,7 @@ import{
     Hide,
     Show,
     Select,
+    FormLabel,
 } from '@chakra-ui/react';
 import Auth from "../../components/Auth";
 import useAuth from '../../hooks/useAuth';
@@ -29,7 +30,7 @@ import {db} from '../../firebase';
 import firebase from 'firebase/app';
 
 //define the JSX component to show just one single todo
-const todoItem = ({itemData}) => {
+const TodoItem = ({itemData}) => {
     const [inputTitle, setTitle] = useState(itemData.title);
     const [inputDesc, setDesc] = useState(itemData.description);
     const [statusCh, setStatusCh] = useState(itemData.status);
@@ -79,26 +80,26 @@ const todoItem = ({itemData}) => {
                 {itemData.title}
             </Heading>
             <Text>
-                {itemData.description}
+                Description: {itemData.description}
             </Text>
             <Text>
-                {itemData.status}
+                Status: {itemData.status}
             </Text>
             </Box>
            <Box my={5}> 
-           <Text>Title:</Text>
+           <FormLabel fontSize='md'>Title:</FormLabel>
           <Input type="text" value={inputTitle} onChange={(e) => setTitle(e.target.value)} placeholder="title" />
           </Box>
           <Box my={5}>
-          <Text>Description:</Text>
+          <FormLabel fontSize='md'>Description:</FormLabel>
           <Input type="text" value={inputDesc} onChange={(e) => setDesc(e.target.value)} placeholder="description" />
           </Box>
           <Box my={5}>
-          <Text>Status:</Text>
+          <FormLabel fontSize='md'>Status:</FormLabel>
           <Select value={statusCh} onChange={(e) => setStatusCh(e.target.value)}>
 <option
 value={"pending"}
-style={{ color: "yellow", fontWeight: "bold" }}
+style={{ color: "red", fontWeight: "bold" }}
 >
 Pending ⌛
 </option>
@@ -122,7 +123,7 @@ Completed ✅
                 <Link href="/">Back to Add Todo Page</Link>
             </Button>
             <Button bg="green" color="white" ml={5} _hover={{ bg: 'green.800', transform: 'scale(1.10)' }}>
-                <Link href="/list-todo">Back toTodo List Page</Link>
+                <Link href="/list-todo">Back to Todo List Page</Link>
             </Button>
             </Box>
         </Container>
@@ -151,4 +152,4 @@ export async function getServerSideProps(context) {
     }
 }
 //export the component
-export default todoItem;
+export default TodoItem;

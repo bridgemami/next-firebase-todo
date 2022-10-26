@@ -3,6 +3,8 @@ import {
     Box,
     Heading,
     SimpleGrid,
+    Button,
+    Link,
     Text,
     useToast,
     } from "@chakra-ui/react";
@@ -83,6 +85,7 @@ const EventList = () => {
     //define the jsx component
     return (
     <Box mt={5}>
+    <Heading textAlign={"center"} as='h1' my={5} noOfLines={1} size='xl'>Event List</Heading>
     <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
     {events &&
     events.map(
@@ -146,8 +149,11 @@ const EventList = () => {
     >
     {event.status}
     </Badge>
-    <Text float={"left"}>{event.date} <br />{event.time}</Text>
     </Heading>
+    <Text>{event.date} <br />{event.time}</Text>
+    <Link href={`/event/${event.id}`}><Button colorScheme='green' size='xs'>Update</Button></Link>
+
+  
     </Box>
     ))}
     </SimpleGrid>

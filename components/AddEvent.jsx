@@ -7,10 +7,12 @@ Box,
 Input,
 Button,
 Textarea,
+Heading,
 Stack,
 Select,
 Text,
 useToast,
+FormLabel,
 } from "@chakra-ui/react";
 //bring in useAuth from our hooks
 import useAuth from "../hooks/useAuth";
@@ -61,8 +63,9 @@ toast({
 //let's return the markup for the addToDo JSX component
 return (
 <Box w="40%" margin={"0 auto"} display="block" mt={5}>
+<Heading textAlign={"center"} as='h1' my={5} noOfLines={1} size='xl'>Add Event</Heading>
 <Stack direction="column">
-<Text fontSize='md'>Name of the Event:</Text>
+<FormLabel fontSize='md'>Name of the Event:</FormLabel>
 <Input 
 placeholder="Name of Event"
 value={title}
@@ -70,7 +73,7 @@ required="required"
 // e just is local variable standing for the event of a changing.
 onChange={(e) => setTitle(e.target.value)}
 />
-<Text fontSize='md'>Day of the Event:</Text>
+<FormLabel fontSize='md'>Day of the Event:</FormLabel>
 <Input
  placeholder="Date of the event"
  size="md"
@@ -78,7 +81,7 @@ onChange={(e) => setTitle(e.target.value)}
  value={date}
 onChange={(e) => setDate(e.target.value)}
 />
-<Text fontSize='md'>Time of the Event:</Text>
+<FormLabel fontSize='md'>Time of the Event:</FormLabel>
 <Input
 placeholder="Time of the Event"
 size="md"
@@ -87,7 +90,7 @@ pattern="[0-9]{2}:[0-9]{2}"
 value={time}
 onChange={(e) => setTime(e.target.value)}
 />
-<Text fontSize='md'>Did you RSVP?</Text>
+<FormLabel fontSize='md'>Did you RSVP?</FormLabel>
 <Select value={status} onChange={(e) => setStatus(e.target.value)}>
 <option
 value={"Yes"}

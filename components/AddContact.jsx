@@ -12,6 +12,7 @@ Select,
 InputGroup,
 FormControl,
 FormLabel,
+Heading,
 InputLeftElement,
 InputRightElement,
 Text,
@@ -66,6 +67,7 @@ toast({
 //let's return the markup for the addToDo JSX component
 return (
 <Box w="40%" margin={"0 auto"} display="block" mt={5}>
+<Heading textAlign={"center"} as='h1' my={5} noOfLines={1} size='xl'>Add a Contact</Heading>
 <Stack direction="column">
   <FormControl>
 <FormLabel fontSize='md'>Name:</FormLabel>
@@ -77,7 +79,7 @@ value={name}
 onChange={(e) => setName(e.target.value)}
 />
 </FormControl>
-<Text fontSize='md'>Phone:</Text>
+<FormLabel fontSize='md'>Phone:</FormLabel>
 {/* <Input
 type="tel"
 placeholder="Phone Number"
@@ -85,14 +87,14 @@ value={phone}
 onChange={(e) => setPhone(e.target.value)}
 /> */}
 <InputGroup>
-    <InputLeftElement
+<InputLeftElement
       pointerEvents='none'
       children={<FaPhoneAlt />}
     />
     <Input type='tel' placeholder='Phone number'value={phone}
 onChange={(e) => setPhone(e.target.value)} />
   </InputGroup>
-<Text fontSize='md'>Email:</Text>
+<FormLabel fontSize='md'>Email:</FormLabel>
 <InputGroup>
     <InputLeftElement
       pointerEvents='none'
@@ -101,7 +103,7 @@ onChange={(e) => setPhone(e.target.value)} />
     <Input type='email' placeholder='Email' value={email}
 onChange={(e) => setEmail(e.target.value)} />
   </InputGroup>
-<Text fontSize='md'>Address:</Text>
+<FormLabel fontSize='md'>Address:</FormLabel>
 <Textarea
 placeholder="123 Main Street, Everytown, CA. #####"
 value={address}
