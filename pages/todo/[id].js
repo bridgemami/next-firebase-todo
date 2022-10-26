@@ -32,7 +32,7 @@ import firebase from 'firebase/app';
 const todoItem = ({itemData}) => {
     const [inputTitle, setTitle] = useState(itemData.title);
     const [inputDesc, setDesc] = useState(itemData.description);
-    const [statusMsg, setStatusMsg] = useState(itemData.status);
+    const [statusCh, setStatusCh] = useState(itemData.status);
     const toast= useToast();
     //enforce user to login first
     // const {user} = useAuth() || {};
@@ -49,7 +49,7 @@ const todoItem = ({itemData}) => {
             const newData = {
                 title: inputTitle,
                 description: inputDesc,
-                status: statusMsg
+                status: statusCh
             }
             setDoc(docRef, newData, {merge:true})
             .then(docSnap =>{
@@ -95,7 +95,7 @@ const todoItem = ({itemData}) => {
           </Box>
           <Box my={5}>
           <Text>Status:</Text>
-          <Select value={statusMsg} onChange={(e) => setStatusMsg(e.target.value)}>
+          <Select value={statusCh} onChange={(e) => setStatusCh(e.target.value)}>
 <option
 value={"pending"}
 style={{ color: "yellow", fontWeight: "bold" }}
