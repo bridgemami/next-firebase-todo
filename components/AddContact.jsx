@@ -18,10 +18,10 @@ InputRightElement,
 Text,
 useToast
 } from "@chakra-ui/react";
-import { FaPhoneAlt, FaRegEnvelope} from "react-icons/fa";
 //bring in useAuth from our hooks
 import useAuth from "../hooks/useAuth";
 import { makeContact } from "../api/contact";
+
 //now lets define a react jsx component
 const AddContact = () => {
     //every form control (text input) we want to associate a react state
@@ -87,19 +87,11 @@ value={phone}
 onChange={(e) => setPhone(e.target.value)}
 /> */}
 <InputGroup>
-<InputLeftElement
-      pointerEvents='none'
-      children={<FaPhoneAlt />}
-    />
     <Input type='tel' placeholder='Phone number'value={phone}
 onChange={(e) => setPhone(e.target.value)} />
   </InputGroup>
 <FormLabel fontSize='md'>Email:</FormLabel>
 <InputGroup>
-    <InputLeftElement
-      pointerEvents='none'
-      children={<FaRegEnvelope />}
-    />
     <Input type='email' placeholder='Email' value={email}
 onChange={(e) => setEmail(e.target.value)} />
   </InputGroup>

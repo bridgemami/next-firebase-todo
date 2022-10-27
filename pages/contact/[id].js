@@ -19,7 +19,6 @@ import{
     Select,
     FormLabel,
 } from '@chakra-ui/react';
-import { FaEnvelope, FaPhoneAlt, FaRegEnvelope} from "react-icons/fa";
 
 import Auth from "../../components/Auth";
 import useAuth from '../../hooks/useAuth';
@@ -101,20 +100,12 @@ const ContactItem = ({itemData}) => {
           <Box my={5}>
           <FormLabel fontSize='md'>Phone:</FormLabel>
           <InputGroup>
-        <InputLeftElement
-      pointerEvents='none'
-      children={<FaPhoneAlt />}
-            />
           <Input type="phone" value={inputPhone} onChange={(e) => setPhone(e.target.value)} placeholder="phone number" />
           </InputGroup>
           </Box>
           <Box my={5}>
           <FormLabel fontSize='md'>Email:</FormLabel>
           <InputGroup>
-        <InputLeftElement
-      pointerEvents='none'
-      children={<FaRegEnvelope />}
-            />
           <Input type="email" value={inputEmail} onChange={(e) => setEmail(e.target.value)} placeholder="email" />
           </InputGroup>
           </Box>
