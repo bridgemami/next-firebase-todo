@@ -4,7 +4,9 @@ import {
     Heading,
     SimpleGrid,
     Text,
+    Link,
     useToast,
+    Button,
     } from "@chakra-ui/react";
     import React, { useEffect } from "react";
     import useAuth from "../hooks/useAuth";
@@ -12,14 +14,20 @@ import {
         collection, 
         onSnapshot,
         query,
-        where 
+        where,
+        updateDoc, doc 
     } from "firebase/firestore";
     import { db } from "../firebase";
-    import { FaToggleOff, FaToggleOn, FaTrash } from "react-icons/fa";
+    import { FaToggleOff, FaToggleOn, FaTrash, FaEdit } from "react-icons/fa";
     import { deleteTodo, toggleTodoStatus } from "../api/todo";
     
     //define the jsx component for the list
 const TodoList = () => {
+const [title, setTitle] = React.useState("");
+const [description, setDescription] = React.useState("");
+const [status, setStatus] = React.useState("pending");
+const [isLoading, setIsLoading] = React.useState(false);
+const [isUpdate, setIsUpdate] = React.useState(false);
     const [todos, setTodos] = React.useState([]);
     const {  user } = useAuth() || {};
     const toast = useToast();    
@@ -53,6 +61,7 @@ const TodoList = () => {
             }, 
     [user]
     );
+
     //build nested function to delete a todo
     const handleTodoDelete = async (id) => {
     if (confirm("Are you sure you wanna delete this todo?")) {
@@ -80,9 +89,11 @@ const TodoList = () => {
     }
     );
     };
+
     //define the jsx component
     return (
     <Box mt={5}>
+    <Heading textAlign={"center"} as='h1' my={5} noOfLines={1} size='xl'>Todo List</Heading>   
     <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
     {todos &&
     todos.map(
@@ -138,11 +149,12 @@ const TodoList = () => {
     {todo.status}
     </Badge>
     </Heading>
-    <Text>{todo.description}</Text>
+    <Text>Task: {todo.description}</Text>
+    <Link href={`/todo/${todo.id}`}><Button colorScheme='green' size='xs'>Update</Button></Link>
     </Box>
     ))}
-    </SimpleGrid>
-    </Box>
+    </SimpleGrid> 
+</Box>
     );
     };
     export default TodoList;

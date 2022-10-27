@@ -10,16 +10,16 @@ deleteDoc,
 } from "firebase/firestore";
 //create a function as an arrow function
 //const FUNCTIONAME= asyn (arguments) => {code};
-const makeEvent = async ({ userId, title, day, time, status }) => {
+const makeEvent = async ({ userId, title, date, time, status }) => {
 try {
     //collection name is in " "
 await addDoc(collection(db, "event"), {
 user: userId,
 title: title,
-day: day,
+date: date,
 time: time,
 status: status,
-createdAt: new Date()
+createdAt: new Date().toString()
 });
 } catch (err) {
     console.log(err);
@@ -32,7 +32,7 @@ const toggleEventStatus = async ({ docId, status }) => {
     await updateDoc( 
     eventRef,
     {
-        status: myStatus
+        status: status
     }
     
     );

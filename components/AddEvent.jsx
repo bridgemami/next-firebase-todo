@@ -7,9 +7,12 @@ Box,
 Input,
 Button,
 Textarea,
+Heading,
 Stack,
 Select,
+Text,
 useToast,
+FormLabel,
 } from "@chakra-ui/react";
 //bring in useAuth from our hooks
 import useAuth from "../hooks/useAuth";
@@ -18,7 +21,7 @@ import { makeEvent } from "../api/event";
 const AddEvent = () => {
     //every form control (text input) we want to associate a react state
 const [title, setTitle] = React.useState("");
-const [day, setDay] = React.useState("");
+const [date, setDate] = React.useState("");
 const [time, setTime] = React.useState("");
 const [status, setStatus] = React.useState("pending");
 const [isLoading, setIsLoading] = React.useState(false);
@@ -41,7 +44,7 @@ return;
 setIsLoading(true);
 const event = {
 title,
-day,
+date,
 time,
 status,
 userId: user.uid,
@@ -49,9 +52,9 @@ userId: user.uid,
 await makeEvent(event);
 setIsLoading(false);
 setTitle("");
-setDay("");
+setDate("");
 setTime("");
-setStatus("pending");
+setStatus("success");
 //show a floaty with status updates
 toast({ 
     title: "Event created successfully", 
@@ -60,40 +63,51 @@ toast({
 //let's return the markup for the addToDo JSX component
 return (
 <Box w="40%" margin={"0 auto"} display="block" mt={5}>
+<Heading textAlign={"center"} as='h1' my={5} noOfLines={1} size='xl'>Add Event</Heading>
 <Stack direction="column">
+<FormLabel fontSize='md'>Name of the Event:</FormLabel>
 <Input 
 placeholder="Name of Event"
 value={title}
+required="required"
 // e just is local variable standing for the event of a changing.
 onChange={(e) => setTitle(e.target.value)}
 />
-<Textarea
-placeholder="Date mm/dd/yy or mm/dd/yyyy"
-value={day}
-onChange={(e) => setDay(e.target.value)}
+<FormLabel fontSize='md'>Day of the Event:</FormLabel>
+<Input
+ placeholder="Date of the event"
+ size="md"
+ type="date"
+ value={date}
+onChange={(e) => setDate(e.target.value)}
 />
-<Textarea
-placeholder="00:00 AM or PM / 00-24"
+<FormLabel fontSize='md'>Time of the Event:</FormLabel>
+<Input
+placeholder="Time of the Event"
+size="md"
+type="time"
+pattern="[0-9]{2}:[0-9]{2}"
 value={time}
 onChange={(e) => setTime(e.target.value)}
 />
+<FormLabel fontSize='md'>Did you RSVP?</FormLabel>
 <Select value={status} onChange={(e) => setStatus(e.target.value)}>
 <option
-value={"pending"}
-style={{ color: "yellow", fontWeight: "bold" }}
->
-Pending ⌛
-</option>
-<option
-value={"completed"}
+value={"Yes"}
 style={{ color: "green", fontWeight: "bold" }}
 >
-Completed ✅
+Yes, I did RSVP
+</option>
+<option
+value={"Pending"}
+style={{ color: "red", fontWeight: "bold" }}
+>
+I have not RSVP or do not need to
 </option>
 </Select>
 <Button
 onClick={() => handleEventCreate()}
-disabled={title.length < 1 || day.length < 1 || time.length < 1  || isLoading}
+disabled={title.length < 1 || date.length < 1  || time.length < 1  || isLoading}
 colorScheme="teal"
 variant="solid"
 >
