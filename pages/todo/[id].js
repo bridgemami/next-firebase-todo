@@ -42,7 +42,7 @@ const TodoItem = ({itemData}) => {
         const docRef =  await doc(db, "todo", itemData.id);
         console.log(docRef);
         const docSnap = await getDoc(docRef);
-        console.log(docSnap);
+        console.log(docSnap + "Hello");
         if(docSnap.exists()){
             console.log(inputDesc)
             const newData = {
