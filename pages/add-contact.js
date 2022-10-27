@@ -1,13 +1,14 @@
 import { Container } from "@chakra-ui/react";
-import AddTodo from "../components/AddTodo";
+import AddContact from "../components/AddContact";
+import ContactList from "../components/ContactList";
 import Auth from "../components/Auth";
 // import TodoList from "../components/TodoList";
 
-export default function AddToDo() {
+export default function Contact() {
 return (
         <Container maxW="7xl">
         <Auth />
-        <AddTodo />
+        <AddContact />
         </Container>
       );
 }

@@ -1,11 +1,14 @@
 import React from "react";
-import { Box, Button, Link, Text, useColorMode } from "@chakra-ui/react";
+import { useState } from 'react'
+import { Box, Button, Link, Text, useColorMode, Switch, Flex, IconButton } from "@chakra-ui/react";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { FaGoogle, FaMoon, FaSun } from "react-icons/fa";
 import { auth } from "../firebase";
 import useAuth from "../hooks/useAuth";
 //react jsx login component
 const Auth = () => {
+const [display, changeDisplay] = useState('none');
 const { toggleColorMode, colorMode } = useColorMode();
 const { isLoggedIn, user } = useAuth() || {};
 //define a function to perform the login operation
@@ -40,19 +43,26 @@ console.log(`authentication error ${errorCode} ${errorMessage}.`);
 };
 //define the jsx component
 return (
-<Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
-    <Box>
-        <Link href="/add-todo">
-        Add To Do
-        </Link>
-    </Box>
+    <Flex>
+        <Flex
+        // position="fixed"
+        // align="center"
+      >
+        {/* Desktop Nav Bar */}
+<Flex display={['none', 'none', 'flex', 'flex']}  justifyContent="space-evenly" align="center"
+w={"90vw"}>
     <Box>
     <Link href="/">
-        List All To Dos
+        Add Todo
         </Link>
     </Box>
     <Box>
-    <Link href="/event">
+        <Link href="/list-todo">
+        Todo List
+        </Link>
+    </Box>
+    <Box>
+    <Link href="/add-event">
         Add Event
         </Link>
     </Box>
@@ -61,7 +71,16 @@ return (
         Event List
         </Link>
     </Box>
-    
+    <Box>
+    <Link href="/add-contact">
+        Add Contact
+        </Link>
+    </Box>
+    <Box>
+    <Link href="/list-contact">
+        Contact List
+        </Link>
+    </Box>    
     <Box textAlign={"right"}>
 <Button onClick={() => toggleColorMode()}>
 {colorMode == "dark" ? <FaSun /> : <FaMoon />}
@@ -81,7 +100,106 @@ return (
             Login with Google
             </Button>
             )}
-</Box>
+            
+</Flex>
+{/* Mobile Nav Bar */}
+<Flex justify="center"
+alignContent={"center"}>
+<IconButton
+alignSelf={"center"}
+aria-label="Open Menu"
+size= "lg"
+mr= {2}
+mt={2}
+icon= {<HamburgerIcon />}
+display={['flex', 'flex', 'none', 'none']}
+onClick={() => changeDisplay('flex')}
+/>
+ </Flex>
+</Flex>
+<Flex
+ w='100vw'
+ display={display}
+ bgColor="gray.50"
+ zIndex={20}
+ h="100vh"
+ pos="fixed"
+ top="0"
+ left="0"
+ overflowY="auto"
+ flexDir="column">
+    <Flex justify="flex-end">
+          <IconButton
+            mt={2}
+            mr={2}
+            aria-label="Close Menu"
+            size="lg"
+            icon={
+              <CloseIcon />
+            }
+            onClick={() => changeDisplay('none')}
+          />
+        </Flex>
+<Flex
+flexDir={"column"}
+align="center"
+justifyContent={"space-evenly"}
+zIndex={20}
+bgColor="gray.50"
+>
+    <Box>
+    <Link href="/">
+        Add Todo
+        </Link>
+    </Box>
+    <Box>
+        <Link href="/list-todo">
+        Todo List
+        </Link>
+    </Box>
+    <Box>
+    <Link href="/add-event">
+        Add Event
+        </Link>
+    </Box>
+    <Box>
+    <Link href="/list-event">
+        Event List
+        </Link>
+    </Box>
+    <Box>
+    <Link href="/add-contact">
+        Add Contact
+        </Link>
+    </Box>
+    <Box>
+    <Link href="/list-contact">
+        Contact List
+        </Link>
+    </Box>    
+    <Box textAlign={"right"}>
+<Button onClick={() => toggleColorMode()}>
+{colorMode == "dark" ? <FaSun /> : <FaMoon />}
+</Button>
+    </Box>
+{/* to see if you are logged in */}
+        {isLoggedIn && (
+            <>
+            <Text color="green.500">{user.email}</Text>
+            <Link color="red.500" onClick={() => auth.signOut()}>
+            Logout
+            </Link>
+            </>
+            )}
+            {!isLoggedIn && (
+            <Button leftIcon={<FaGoogle />} onClick={() => handleAuth()}>
+            Login with Google
+            </Button>
+            )}
+</Flex>
+</Flex>
+</Flex>
+
 );
 };
 // export component

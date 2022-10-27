@@ -3,6 +3,8 @@ import {
     Box,
     Heading,
     SimpleGrid,
+    Button,
+    Link,
     Text,
     useToast,
     } from "@chakra-ui/react";
@@ -35,7 +37,7 @@ const EventList = () => {
                     where("user", "==", user.uid)
                     );
                     //since query() is async, here er set up an event handler with firebase
-                 onSnapshot(
+                onSnapshot(
                     q, 
                     (querySnapshot) => {
                         //in this function we have all the results from q in querySnapshot
@@ -53,14 +55,14 @@ const EventList = () => {
             }, 
     [user]
     );
-    //build nested function to delete a todo
+    //build nested function to delete an event
     const handleEventDelete = async (id) => {
     if (confirm("Are you sure you wanna delete this event?")) {
     deleteEvent(id);
     toast(
         { 
             title: "Event deleted successfully", 
-            status: "Success" 
+            status: "success" 
         }
         );
     }
@@ -75,7 +77,7 @@ const EventList = () => {
         }
         );
     toast({
-    title: `Event marked ${newStatus}`,
+    title: `RSVP ${newStatus}`,
     status: newStatus == "completed" ? "success" : "warning",
     }
     );
@@ -83,6 +85,7 @@ const EventList = () => {
     //define the jsx component
     return (
     <Box mt={5}>
+    <Heading textAlign={"center"} as='h1' my={5} noOfLines={1} size='xl'>Event List</Heading>
     <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
     {events &&
     events.map(
@@ -97,6 +100,7 @@ const EventList = () => {
     >
     <Heading as="h3" fontSize={"xl"}>
     {event.title}{" "}
+   
     <Badge
     color="red.500"
     bg="inherit"
@@ -111,6 +115,13 @@ const EventList = () => {
     >
     <FaTrash />
     </Badge>
+    <Text fontSize='small'
+    //  float="right"
+     opacity="0.8"
+     align={"right"}
+     paddingEnd={2}>
+        HAVE YOU RSVP?    
+        </Text>
     <Badge
     color={event.status == "pending" ? "gray.500" : "green.500"}
     bg="inherit"
@@ -130,7 +141,8 @@ const EventList = () => {
     >
     {event.status == "pending" ? <FaToggleOff /> : <FaToggleOn />}
     </Badge>
-    <Badge
+
+   <Badge
     float="right"
     opacity="0.8"
     bg={event.status == "pending" ? "yellow.500" : "green.500"}
@@ -138,7 +150,11 @@ const EventList = () => {
     {event.status}
     </Badge>
     </Heading>
-    <Text>{event.day}, {event.time}</Text>
+    <Text>Date: {event.date}</Text>
+    <Text>Time: {event.time}</Text>
+    <Link href={`/event/${event.id}`}><Button colorScheme='green' size='xs'>Update</Button></Link>
+
+  
     </Box>
     ))}
     </SimpleGrid>
